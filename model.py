@@ -11,8 +11,8 @@ import retrying
 forecast_price = {}
 
 binance_data_path = os.path.join(data_base_path, "binance/futures-klines")
-MAX_DATA_SIZE = 10000  # Giới hạn số lượng dữ liệu tối đa khi lưu trữ
-INITIAL_FETCH_SIZE = 10000  # Số lượng nến lần đầu tải về
+MAX_DATA_SIZE = 1000  # Giới hạn số lượng dữ liệu tối đa khi lưu trữ
+INITIAL_FETCH_SIZE = 1000  # Số lượng nến lần đầu tải về
 
 @retrying.retry(wait_exponential_multiplier=1000, wait_exponential_max=10000, stop_max_attempt_number=5)
 def fetch_prices(symbol, interval="1m", limit=1000, start_time=None, end_time=None):
@@ -61,7 +61,7 @@ def download_data(token):
     download_path = os.path.join(binance_data_path, token.lower())
     
     # Đường dẫn file CSV để lưu trữ
-    file_path = os.path.join(download_path, f"{token.lower()}_5m_data.csv")
+    file_path = os.path.join(download_path, f"{token.lower()}_1m_data.csv")
 
     # Kiểm tra xem file có tồn tại hay không
     if os.path.exists(file_path):
